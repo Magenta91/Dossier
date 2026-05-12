@@ -1,0 +1,32 @@
+# Environment
+.env
+.env.local
+*.env
+
+# Streamlit secrets (never commit real secrets)
+frontend/.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Service account key files
+*service_account*.json
+*credentials*.json

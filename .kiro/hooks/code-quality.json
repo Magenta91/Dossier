@@ -1,0 +1,41 @@
+{
+  "hooks": [
+    {
+      "name": "Python code quality check",
+      "description": "When a backend Python file is saved, check for common issues: unused imports, missing type hints on public functions, and hardcoded secrets.",
+      "enabled": true,
+      "when": {
+        "type": "fileEdited",
+        "patterns": [
+          "backend/*.py"
+        ]
+      },
+      "steps": [
+        {
+          "type": "prompt",
+          "prompt": "A backend Python file was just saved. Please do a quick review of the changed file and flag any of these issues if present:\n1. Hardcoded API keys, passwords, or secrets (should use os.getenv)\n2. Relative imports (all imports in backend/ must be absolute)\n3. Raw Drive API q strings built by string concatenation (must go through query_builder.py)\n4. LLM calls outside of agent_nodes.py\n\nIf none of these issues are found, respond with: 'No issues found.'\nIf issues are found, list them briefly with the line number."
+        }
+      ]
+    },
+    {
+      "name": "Secrets guard on commit",
+      "description": "Before any file is saved that looks like a config or env file, warn if it might contain secrets.",
+      "enabled": true,
+      "when": {
+        "type": "fileEdited",
+        "patterns": [
+          "**/.env",
+          "**/secrets.toml",
+          "**/*credentials*.json",
+          "**/*service_account*.json"
+        ]
+      },
+      "steps": [
+        {
+          "type": "prompt",
+          "prompt": "A sensitive config file was just edited. Remind the user:\n1. This file must be listed in .gitignore\n2. It must never be committed to Git\n3. For deployment, these values must be set as environment variables in Render (backend) or Streamlit secrets (frontend)\n\nCheck that .gitignore covers this file pattern and warn if it does not."
+        }
+      ]
+    }
+  ]
+}
