@@ -48,7 +48,14 @@ def build_query(
     if name:
         # Escape single quotes in the name to avoid breaking the query
         safe_name = name.replace("'", "\\'")
-        parts.append(f"name contains '{safe_name}'")
+        
+        # Handle plural/singular variations: if name ends with 's', try both
+        if safe_name.lower().endswith('s') and len(safe_name) > 1:
+            # Try both plural and singular (e.g., "reports" OR "report")
+            singular = safe_name[:-1]
+            parts.append(f"(name contains '{safe_name}' or name contains '{singular}')")
+        else:
+            parts.append(f"name contains '{safe_name}'")
 
     # ── File type filter (dropped at relax level >= 2) ───────────────────────
     if file_type and relax_level < 2:
@@ -74,6 +81,10 @@ def build_query(
 
     # ── Default: return everything in the folder ──────────────────────────────
     if not parts:
-        return "trashed = false"
+        return "mimeType != 'application/vnd.google-apps.folder'"
 
-    return " and ".join(parts)
+    # Always exclude folders
+    query = " and ".join(parts)
+    query += " and mimeType != 'application/vnd.google-apps.folder'"
+    
+    return query

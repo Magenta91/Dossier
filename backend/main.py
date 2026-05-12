@@ -8,9 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from langchain.schema import HumanMessage, AIMessage
 
 from schemas import ChatRequest, ChatResponse, FileResult
-from agent_graph import agent
+from agent_tool_based import run_agent
 
-app = FastAPI(title="TailorTalk Drive Agent", version="1.0.0")
+app = FastAPI(title="Dossier Drive Agent", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,22 +36,11 @@ async def chat(req: ChatRequest):
     history = sessions.get(req.session_id, [])
 
     try:
-        result = agent.invoke(
-            {
-                "messages": history,          # previous turns only
-                "raw_user_message": req.message,
-                "search_intent": None,
-                "q_string": None,
-                "search_results": None,
-                "attempt": 0,
-                "final_response": None,
-                "files": None,
-            }
-        )
+        result = run_agent(req.message, chat_history=history)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-    response_text = result.get("final_response") or "Sorry, something went wrong."
+    response_text = result.get("response") or "Sorry, something went wrong."
     files = result.get("files") or []
 
     # Persist updated history

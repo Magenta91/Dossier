@@ -30,3 +30,6 @@ Thumbs.db
 # Service account key files
 *service_account*.json
 *credentials*.json
+
+# Assignment/test data folder
+assignment/
