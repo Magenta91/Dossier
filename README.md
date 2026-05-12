@@ -89,22 +89,7 @@ Results → LLM formats response → User
 ## 🌐 Deployment
 
 ### Backend → Render
-
-1. **Create Web Service**
-   - Connect your GitHub repository
-   - Set **Root Directory**: `backend`
-   - Set **Build Command**: `pip install -r requirements.txt`
-   - Set **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-
-2. **Environment Variables**
-   ```
-   PYTHON_VERSION = 3.11
-   GROQ_API_KEY = your_groq_api_key
-   GOOGLE_SERVICE_ACCOUNT_JSON = {"type":"service_account",...}
-   DRIVE_FOLDER_ID = your_folder_id
-   ```
-
-3.  Set `PYTHON_VERSION=3.11` to avoid pydantic-core compilation issues with Python 3.14
+Just  Set `PYTHON_VERSION=3.11` to avoid pydantic-core compilation issues with Python 3.14
 
 **Live Backend**: https://dossier-q74p.onrender.com
 
