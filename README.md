@@ -83,17 +83,8 @@ streamlit run app.py
 ## Deployment
 
 ### Backend → Render
-
-1. Push code to GitHub
-2. Go to [Render](https://render.com) → New Web Service → connect your repo
-3. Set **Root Directory** to `backend`
-4. **Build Command:** `pip install -r requirements.txt`
-5. **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
-6. Add these Environment Variables in the Render dashboard:
-   - `GROQ_API_KEY` — your Groq key
-   - `GOOGLE_SERVICE_ACCOUNT_JSON` — the single-line JSON string
-   - `DRIVE_FOLDER_ID` — e.g. `1qkx58doSeYrcLjHPDysJyVJ36PsSqqlt`
-7. Deploy → copy your `https://tailortalk-backend.onrender.com` URL
+Backend is deployed at render, just add a additional variable of Python version : 3.11, there are some dependency conflict, with pydantic core with python 3.14.
+https://dossier-q74p.onrender.com is the backend link.
 
 ### Frontend → Streamlit Cloud
 
