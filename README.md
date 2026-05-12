@@ -1,8 +1,8 @@
-# 🗂️ Dossier — AI-Powered Google Drive Assistant
+#  Dossier — AI-Powered Google Drive Assistant
 
 A conversational AI agent that searches, filters, and discovers files in Google Drive using natural language. Built with LangChain tool calling and direct Drive API query generation.
 
-## 🌐 Live Demo
+##  Live Demo
 
 - **Frontend**: https://dossier-drive-assistant.streamlit.app/
 - **Backend API**: https://dossier-q74p.onrender.com
@@ -12,7 +12,7 @@ Try it now! Ask questions like:
 - "Show me spreadsheets from last month"
 - "Documents that mention budget"
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 User Query: "Find budget reports from last week"
@@ -44,7 +44,7 @@ Google Drive API (files.list)
 Results → LLM formats response → User
 ```
 
-### 🎯 Key Features
+###  Key Features
 
 - **Direct Query Generation**: LLM writes Drive API `q` parameter strings directly (no intermediate JSON)
 - **Full Drive API Power**: Supports complex queries with `and`/`or`/parentheses
@@ -60,7 +60,7 @@ Results → LLM formats response → User
 
 ---
 
-## 🚀 Setup
+##  Setup
 
 ### 1. Prerequisites
 - Python 3.11+
@@ -84,41 +84,7 @@ Results → LLM formats response → User
    - Share it with the service account's email (Viewer permission)
    - Copy the folder ID from the URL: `https://drive.google.com/drive/folders/FOLDER_ID_HERE`
 
-### 3. Backend (Local Development)
 
-```bash
-cd backend
-cp .env.example .env
-# Edit .env with your credentials:
-# - GROQ_API_KEY
-# - GOOGLE_SERVICE_ACCOUNT_JSON (entire JSON as single line)
-# - DRIVE_FOLDER_ID
-
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-# → Backend runs on http://localhost:8000
-```
-
-**💡 Tip: Converting service account JSON to single line:**
-```bash
-cat your-service-account.json | python3 -c "import sys,json; print(json.dumps(json.load(sys.stdin)))"
-```
-
-### 4. Frontend (Local Development)
-
-```bash
-cd frontend
-pip install -r requirements.txt
-
-# Create secrets file
-mkdir -p .streamlit
-echo 'BACKEND_URL = "http://localhost:8000"' > .streamlit/secrets.toml
-
-streamlit run app.py
-# → Frontend opens at http://localhost:8501
-```
-
----
 
 ## 🌐 Deployment
 
@@ -138,25 +104,12 @@ streamlit run app.py
    DRIVE_FOLDER_ID = your_folder_id
    ```
 
-3. **Important**: Set `PYTHON_VERSION=3.11` to avoid pydantic-core compilation issues with Python 3.14
+3.  Set `PYTHON_VERSION=3.11` to avoid pydantic-core compilation issues with Python 3.14
 
 **Live Backend**: https://dossier-q74p.onrender.com
 
 ### Frontend → Streamlit Cloud
-
-1. **Deploy App**
-   - Go to [share.streamlit.io](https://share.streamlit.io)
-   - Connect your GitHub repo
-   - Set **Main file path**: `frontend/app.py`
-
-2. **Add Secrets** (Settings → Secrets)
-   ```toml
-   BACKEND_URL = "https://dossier-q74p.onrender.com"
-   ```
-
-3. Deploy and get your live URL!
-
----
+frontend at strreamlit cloud: https://dossier-drive-assistant.streamlit.app/
 
 ## 💬 Example Queries
 
@@ -170,7 +123,7 @@ streamlit run app.py
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 |---|---|
@@ -185,7 +138,7 @@ streamlit run app.py
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 dossier/
@@ -212,7 +165,7 @@ dossier/
 
 ---
 
-## 🎯 How It Works
+##  How It Works
 
 ### 1. **User Input**
 User types natural language query: *"Find budget reports from last week"*
@@ -244,7 +197,7 @@ LLM generates friendly response:
 
 ---
 
-## 🔍 Search Capabilities
+##  Search Capabilities
 
 ### Supported Search Types
 
@@ -286,20 +239,13 @@ and modifiedTime > '2024-01-01T00:00:00'
 - **And more**: Any file type supported by Google Drive
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
----
-
 ## 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Built with [LangChain](https://www.langchain.com/)
 - Powered by [Groq](https://groq.com/)
