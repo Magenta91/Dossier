@@ -1,4 +1,4 @@
-# 🗂️ TailorTalk — AI-Powered Google Drive Assistant
+# 🗂️  AI-Powered Google Drive Assistant
 
 A conversational AI agent that searches, filters, and discovers files in Google Drive using natural language.
 
